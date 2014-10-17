@@ -24,14 +24,17 @@ class SQLConnection:
         return opened_ok
     
     def close_database(self):
-        
+
         if self.db:
-            self.db.close()
-            #remove the database from the QSqlDatabase object - "conn" is the default
-            #database name
-            QSqlDatabase.removeDatabase("conn")
-            closed = self.db.open()
-            print("closed con")
+            if self.db.isOpen() == True:
+                self.db.close()
+                #remove the database from the QSqlDatabase object - "conn" is the default
+                #database name
+                QSqlDatabase.removeDatabase("conn")
+                closed = self.db.open()
+                print("closed con")
+            else:
+                print("No connection open")
         else:
             print("No connection to close!")
 

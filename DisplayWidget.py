@@ -22,15 +22,42 @@ class DisplayWidget(QWidget):
 
         self.results_table = QTableView()
 
+        #create buttons
+        self.searchButton = QPushButton("Search")
+        self.orderButton = QPushButton("Order")
+        self.newButton1 = QPushButton("New Button")
+        self.newButton2 = QPushButton("New Button2")
+
+        #create the button layout
+        self.buttonLayout = QHBoxLayout()
+        self.buttonLayout.addWidget(self.searchButton)
+        self.buttonLayout.addWidget(self.orderButton)
+        self.buttonLayout.addWidget(self.newButton1)
+        self.buttonLayout.addWidget(self.newButton2)
+
+        #create the button widget
+        self.buttonWidget = QWidget()
+        self.buttonWidget.setLayout(self.buttonLayout)
+
+
+        #create the main results layout - Vertical         
         self.results_layout = QVBoxLayout()
         self.results_layout.addWidget(self.results_table)
+        self.results_layout.addWidget(self.buttonWidget)
 
+        #create the main results widget
         self.results_widget = QWidget()
         self.results_widget.setLayout(self.results_layout)
 
-        self.stacked_layout.addWidget(self.results_widget)
 
-        
+        #add the results widget to the stacked layout
+        self.stacked_layout.addWidget(self.results_widget)
+        self.newButton2.clicked.connect(self.testMessageBox)
+    def testMessageBox(self):
+        displayText = """
+The New Button has been pressed!
+"""
+        QMessageBox.information(self,"Information Window Title",displayText)
 
     def show_results(self,query):
         self.model = QSqlQueryModel()

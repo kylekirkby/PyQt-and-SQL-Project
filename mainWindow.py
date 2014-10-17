@@ -11,9 +11,15 @@ class Window(QMainWindow):
     def __init__(self):
         
         super().__init__()
-        self.setWindowTitle("My Window")
+        #palette = QPalette()
+        #palette.setColor(QPalette.Background,QColor(0, 0, 255, 127))
+
+        #self.setPalette(palette)
+        
+        self.setWindowTitle("Coffee Database PyQt4 SQL")
         self.resize(350,400)
-        self.icon = QIcon(QPixmap())
+        self.icon = QIcon(QPixmap("./images/coffeeIcon.png"))
+        self.setWindowIcon(self.icon)
 
         #connection
         self.connection = None
